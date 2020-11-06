@@ -10068,135 +10068,138 @@
   <query>
     <name>AMM_S_GET_REGISTRO</name>
     <value>
-      SELECT 		R.SYSTEM_ID AS ID_REGISTRO,
-      R.VAR_CODICE AS CODICE,
-      R.VAR_DESC_REGISTRO AS DESCRIZIONE,
-      R.ID_AMM AS ID_AMMINISTRAZIONE,
-      A.VAR_CODICE_AMM AS CODICE_AMMINISTRAZIONE,
-      R.VAR_EMAIL_REGISTRO AS EMAIL,
-      R.VAR_USER_MAIL AS USER_EMAIL,
-      R.VAR_PWD_MAIL AS PWD_EMAIL,
-      R.VAR_SERVER_SMTP AS SERVER_SMTP,
-      R.NUM_PORTA_SMTP AS PORTA_SMTP,
-      R.VAR_SERVER_POP AS SERVER_POP,
-      R.NUM_PORTA_POP AS PORTA_POP,
-      R.CHA_AUTOMATICO AS APERTURA_AUTOMATICA,
-      R.VAR_USER_SMTP AS USER_SMTP,
-      R.VAR_PWD_SMTP AS PWD_SMTP,
-      R.ID_PEOPLE_AOO,
-      R.ID_RUOLO_AOO,R.CHA_SMTP_SSL,R.CHA_POP_SSL,R.cha_smtp_sta,r.cha_auto_interop,
-      R.CHA_RF, R.ID_AOO_COLLEGATA, R.CHA_DISABILITATO,
-      R.DIRITTO_RUOLO_AOO,
-      R.CHA_STATO AS STATO,
-      R.ID_RUOLO_RESP,
-      R.VAR_SERVER_IMAP,
-      R.NUM_PORTA_IMAP,
-      R.VAR_TIPO_CONNESSIONE,
-      R.VAR_INBOX_IMAP,
-      R.VAR_BOX_MAIL_ELABORATE,
-      R.VAR_MAIL_NON_ELABORATE,
-      R.CHA_IMAP_SSL,
-      R.VAR_SOLO_MAIL_PEC,
-      R.CHA_RICEVUTA_PEC,
-      R.INVIO_RICEVUTA_MANUALE,
-      R.VAR_PREG,
-      R.ANNO_PREG,
-      R.VAR_MAIL_RIC_PENDENTE
-      FROM
-      DPA_EL_REGISTRI R,
-      DPA_AMMINISTRA A
-      WHERE
-      R.ID_AMM=A.SYSTEM_ID AND
-      R.SYSTEM_ID=@idRegistro@
-      ORDER BY	R.VAR_CODICE ASC
-    </value>
+		SELECT 		R.SYSTEM_ID AS ID_REGISTRO,
+		R.VAR_CODICE AS CODICE,
+		R.VAR_DESC_REGISTRO AS DESCRIZIONE,
+		R.ID_AMM AS ID_AMMINISTRAZIONE,
+		A.VAR_CODICE_AMM AS CODICE_AMMINISTRAZIONE,
+		R.VAR_EMAIL_REGISTRO AS EMAIL,
+		R.VAR_USER_MAIL AS USER_EMAIL,
+		R.VAR_PWD_MAIL AS PWD_EMAIL,
+		R.VAR_SERVER_SMTP AS SERVER_SMTP,
+		R.NUM_PORTA_SMTP AS PORTA_SMTP,
+		R.VAR_SERVER_POP AS SERVER_POP,
+		R.NUM_PORTA_POP AS PORTA_POP,
+		R.CHA_AUTOMATICO AS APERTURA_AUTOMATICA,
+		R.VAR_USER_SMTP AS USER_SMTP,
+		R.VAR_PWD_SMTP AS PWD_SMTP,
+		R.ID_PEOPLE_AOO,
+		R.ID_RUOLO_AOO,R.CHA_SMTP_SSL,R.CHA_POP_SSL,R.cha_smtp_sta,r.cha_auto_interop,
+		R.CHA_RF, R.ID_AOO_COLLEGATA, R.CHA_DISABILITATO,
+		R.DIRITTO_RUOLO_AOO,
+		R.CHA_STATO AS STATO,
+		R.ID_RUOLO_RESP,
+		R.VAR_SERVER_IMAP,
+		R.NUM_PORTA_IMAP,
+		R.VAR_TIPO_CONNESSIONE,
+		R.VAR_INBOX_IMAP,
+		R.VAR_BOX_MAIL_ELABORATE,
+		R.VAR_MAIL_NON_ELABORATE,
+		R.CHA_IMAP_SSL,
+		R.VAR_SOLO_MAIL_PEC,
+		R.CHA_RICEVUTA_PEC,
+		R.INVIO_RICEVUTA_MANUALE,
+		R.VAR_PREG,
+		R.ANNO_PREG,
+		R.VAR_MAIL_RIC_PENDENTE,
+		R.ID_UTENTE_RESP
+		FROM
+		DPA_EL_REGISTRI R,
+		DPA_AMMINISTRA A
+		WHERE
+		R.ID_AMM=A.SYSTEM_ID AND
+		R.SYSTEM_ID=@idRegistro@
+		ORDER BY	R.VAR_CODICE ASC
+	</value>
   </query>
   <query>
     <name>AMM_I_INSERT_REGISTRO</name>
     <value>
-      INSERT INTO DPA_EL_REGISTRI
-      (
-      @colID@
-      VAR_CODICE,
-      VAR_DESC_REGISTRO,
-      ID_AMM,
-      VAR_EMAIL_REGISTRO,
-      VAR_USER_MAIL,
-      VAR_PWD_MAIL,
-      DTA_OPEN,
-      DTA_CLOSE,
-      NUM_RIF,
-      CHA_STATO,
-      VAR_SERVER_SMTP,
-      NUM_PORTA_SMTP,
-      DTA_ULTIMO_PROTO,
-      VAR_SERVER_POP,
-      NUM_PORTA_POP,
-      CHA_AUTOMATICO,
-      VAR_USER_SMTP,
-      VAR_PWD_SMTP,
-      CHA_AUTO_INTEROP,
-      CHA_RF,
-      ID_AOO_COLLEGATA,
-      CHA_DISABILITATO,
-      ID_RUOLO_RESP,
-      VAR_SERVER_IMAP,
-      NUM_PORTA_IMAP,
-      VAR_TIPO_CONNESSIONE,
-      VAR_INBOX_IMAP,
-      VAR_BOX_MAIL_ELABORATE,
-      VAR_MAIL_NON_ELABORATE,
-      CHA_IMAP_SSL,
-      VAR_SOLO_MAIL_PEC,
-      INVIO_RICEVUTA_MANUALE,
-      CHA_SMTP_STA,
-      CHA_POP_SSL,
-      CHA_RICEVUTA_PEC,
-      VAR_PREG,
-      ANNO_PREG
-      )
-      VALUES
-      (
-      @ID@
-      @codice@,
-      @descrizione@,
-      @idAmministrazione@,
-      @email@,
-      @emailUserID@,
-      @emailPassword@,
-      @dataApertura@,
-      @dataChiusura@,
-      @numRif@,
-      @stato@,
-      @serverSMTP@,
-      @portaSMTP@,
-      @dataUltimoProtocollo@,
-      @serverPOP@,
-      @portaPOP@,
-      @aperturaAutomatica@,
-      @userSMTP@,
-      @passwordSMTP@,
-      @autoInterop@,
-      @chaRF@,
-      @idAooCollegata@,
-      @chaDisabilitato@,
-      @idRuoloResp@,
-      @VAR_SERVER_IMAP@,
-      @NUM_PORTA_IMAP@,
-      @VAR_TIPO_CONNESSIONE@,
-      @VAR_INBOX_IMAP@,
-      @VAR_BOX_MAIL_ELABORATE@,
-      @VAR_MAIL_NON_ELABORATE@,
-      @CHA_IMAP_SSL@,
-      @VAR_SOLO_MAIL_PEC@,
-      @invioRicevutaManuale@,
-      @SMTPsslSTA@,
-      @cha_pop_ssl@,
-      @CHA_RICEVUTA_PEC@,
-      @VAR_PREG@,
-      @ANNO_PREG@
-      )
-    </value>
+		INSERT INTO DPA_EL_REGISTRI
+		(
+		@colID@
+		VAR_CODICE,
+		VAR_DESC_REGISTRO,
+		ID_AMM,
+		VAR_EMAIL_REGISTRO,
+		VAR_USER_MAIL,
+		VAR_PWD_MAIL,
+		DTA_OPEN,
+		DTA_CLOSE,
+		NUM_RIF,
+		CHA_STATO,
+		VAR_SERVER_SMTP,
+		NUM_PORTA_SMTP,
+		DTA_ULTIMO_PROTO,
+		VAR_SERVER_POP,
+		NUM_PORTA_POP,
+		CHA_AUTOMATICO,
+		VAR_USER_SMTP,
+		VAR_PWD_SMTP,
+		CHA_AUTO_INTEROP,
+		CHA_RF,
+		ID_AOO_COLLEGATA,
+		CHA_DISABILITATO,
+		ID_RUOLO_RESP,
+		VAR_SERVER_IMAP,
+		NUM_PORTA_IMAP,
+		VAR_TIPO_CONNESSIONE,
+		VAR_INBOX_IMAP,
+		VAR_BOX_MAIL_ELABORATE,
+		VAR_MAIL_NON_ELABORATE,
+		CHA_IMAP_SSL,
+		VAR_SOLO_MAIL_PEC,
+		INVIO_RICEVUTA_MANUALE,
+		CHA_SMTP_STA,
+		CHA_POP_SSL,
+		CHA_RICEVUTA_PEC,
+		VAR_PREG,
+		ANNO_PREG,
+		ID_UTENTE_RESP
+		)
+		VALUES
+		(
+		@ID@
+		@codice@,
+		@descrizione@,
+		@idAmministrazione@,
+		@email@,
+		@emailUserID@,
+		@emailPassword@,
+		@dataApertura@,
+		@dataChiusura@,
+		@numRif@,
+		@stato@,
+		@serverSMTP@,
+		@portaSMTP@,
+		@dataUltimoProtocollo@,
+		@serverPOP@,
+		@portaPOP@,
+		@aperturaAutomatica@,
+		@userSMTP@,
+		@passwordSMTP@,
+		@autoInterop@,
+		@chaRF@,
+		@idAooCollegata@,
+		@chaDisabilitato@,
+		@idRuoloResp@,
+		@VAR_SERVER_IMAP@,
+		@NUM_PORTA_IMAP@,
+		@VAR_TIPO_CONNESSIONE@,
+		@VAR_INBOX_IMAP@,
+		@VAR_BOX_MAIL_ELABORATE@,
+		@VAR_MAIL_NON_ELABORATE@,
+		@CHA_IMAP_SSL@,
+		@VAR_SOLO_MAIL_PEC@,
+		@invioRicevutaManuale@,
+		@SMTPsslSTA@,
+		@cha_pop_ssl@,
+		@CHA_RICEVUTA_PEC@,
+		@VAR_PREG@,
+		@ANNO_PREG@,
+		@idUtenteResp@
+		)
+	</value>
   </query>
   <query>
     <name>AMM_I_INSERT_LINK_REGISTRO_PROTOCOLLO</name>
@@ -10227,45 +10230,46 @@
   <query>
     <name>AMM_U_UPDATE_REGISTRO</name>
     <value>
-      UPDATE  DPA_EL_REGISTRI
-      SET    	VAR_DESC_REGISTRO=@descrizione@,
-      VAR_EMAIL_REGISTRO=@emailRegistro@,
-      VAR_USER_MAIL=@emailUserID@,
-      VAR_PWD_MAIL=@emailPassword@,
-      VAR_SERVER_SMTP=@serverSMTP@,
-      NUM_PORTA_SMTP=@portaSMTP@,
-      VAR_SERVER_POP=@serverPOP@,
-      NUM_PORTA_POP=@portaPOP@,
-      CHA_AUTOMATICO=@aperturaAutomatica@,
-      VAR_USER_SMTP=@userSMTP@,
-      VAR_PWD_SMTP=@passwordSMTP@,
-      ID_RUOLO_AOO=@id_ruolo_aoo@,
-      ID_PEOPLE_AOO=@id_people_aoo@,
-      CHA_SMTP_SSL=@cha_smtp_ssl@,
-      CHA_SMTP_STA=@cha_smtp_sta@,
-      CHA_POP_SSL=@cha_pop_ssl@,
-      CHA_AUTO_INTEROP = @autoInterop@,
-      CHA_RF = @chaRF@,
-      ID_AOO_COLLEGATA = @idAooCollegata@,
-      ID_RUOLO_RESP = @idRuoloResp@,
-      VAR_SERVER_IMAP = @VAR_SERVER_IMAP@,
-      NUM_PORTA_IMAP = @NUM_PORTA_IMAP@,
-      VAR_TIPO_CONNESSIONE = @VAR_TIPO_CONNESSIONE@,
-      VAR_INBOX_IMAP = @VAR_INBOX_IMAP@,
-      VAR_BOX_MAIL_ELABORATE = @VAR_BOX_MAIL_ELABORATE@,
-      VAR_MAIL_NON_ELABORATE = @VAR_MAIL_NON_ELABORATE@,
-      CHA_IMAP_SSL = @CHA_IMAP_SSL@,
-      INVIO_RICEVUTA_MANUALE = @invioRicevutaManuale@,
-      VAR_SOLO_MAIL_PEC = @VAR_SOLO_MAIL_PEC@,
-      CHA_RICEVUTA_PEC = @CHA_RICEVUTA_PEC@,
-      VAR_PREG = @VAR_PREG@,
-      ANNO_PREG = @ANNO_PREG@,
-      VAR_MAIL_RIC_PENDENTE = @VAR_MAIL_RIC_PENDENTE@
-      @chaDisabilitato@
-      @chaStato@
-      @dirittoRuoloAOO@
-      WHERE	SYSTEM_ID=@systemID@
-    </value>
+		UPDATE  DPA_EL_REGISTRI
+		SET    	VAR_DESC_REGISTRO=@descrizione@,
+		VAR_EMAIL_REGISTRO=@emailRegistro@,
+		VAR_USER_MAIL=@emailUserID@,
+		VAR_PWD_MAIL=@emailPassword@,
+		VAR_SERVER_SMTP=@serverSMTP@,
+		NUM_PORTA_SMTP=@portaSMTP@,
+		VAR_SERVER_POP=@serverPOP@,
+		NUM_PORTA_POP=@portaPOP@,
+		CHA_AUTOMATICO=@aperturaAutomatica@,
+		VAR_USER_SMTP=@userSMTP@,
+		VAR_PWD_SMTP=@passwordSMTP@,
+		ID_RUOLO_AOO=@id_ruolo_aoo@,
+		ID_PEOPLE_AOO=@id_people_aoo@,
+		CHA_SMTP_SSL=@cha_smtp_ssl@,
+		CHA_SMTP_STA=@cha_smtp_sta@,
+		CHA_POP_SSL=@cha_pop_ssl@,
+		CHA_AUTO_INTEROP = @autoInterop@,
+		CHA_RF = @chaRF@,
+		ID_AOO_COLLEGATA = @idAooCollegata@,
+		ID_RUOLO_RESP = @idRuoloResp@,
+		VAR_SERVER_IMAP = @VAR_SERVER_IMAP@,
+		NUM_PORTA_IMAP = @NUM_PORTA_IMAP@,
+		VAR_TIPO_CONNESSIONE = @VAR_TIPO_CONNESSIONE@,
+		VAR_INBOX_IMAP = @VAR_INBOX_IMAP@,
+		VAR_BOX_MAIL_ELABORATE = @VAR_BOX_MAIL_ELABORATE@,
+		VAR_MAIL_NON_ELABORATE = @VAR_MAIL_NON_ELABORATE@,
+		CHA_IMAP_SSL = @CHA_IMAP_SSL@,
+		INVIO_RICEVUTA_MANUALE = @invioRicevutaManuale@,
+		VAR_SOLO_MAIL_PEC = @VAR_SOLO_MAIL_PEC@,
+		CHA_RICEVUTA_PEC = @CHA_RICEVUTA_PEC@,
+		VAR_PREG = @VAR_PREG@,
+		ANNO_PREG = @ANNO_PREG@,
+		VAR_MAIL_RIC_PENDENTE = @VAR_MAIL_RIC_PENDENTE@,
+		ID_UTENTE_RESP = @idUtenteResp@
+		@chaDisabilitato@
+		@chaStato@
+		@dirittoRuoloAOO@
+		WHERE	SYSTEM_ID=@systemID@
+	</value>
   </query>
   <query>
     <name>AMM_D_DELETE_REGISTRO</name>
@@ -18895,12 +18899,6 @@
     </value>
   </query>
   <query>
-    <name>DS_DEL_TRASM_STORICO_FASC</name>
-    <value>
-      DELETE FROM DPA_TRASM_DIAGR WHERE ID_STATO = @idStato@ AND ID_PROJECT = @idProject@
-    </value>
-  </query>
-  <query>
     <name>DS_GET_STATO_FASC_1</name>
     <value>
       SELECT * FROM DPA_DIAGRAMMI
@@ -19441,17 +19439,6 @@
       GG_PRE_SCADENZA = @preScadenza@
       WHERE
       SYSTEM_ID = @idTemplate@
-    </value>
-  </query>
-  <query>
-    <name>DS_ASSOCIA_TIPO_FASC_DIAGRAMMA</name>
-    <value>
-      SELECT * FROM DPA_ASS_DIAGRAMMI
-      WHERE ID_TIPO_FASC = @idTipoFasc@
-      AND
-      ID_DIAGRAMMA = @idDiagramma@
-      AND
-      ID_MOD_TRASM IS NULL AND ID_STATO IS NULL
     </value>
   </query>
   <query>
@@ -20400,17 +20387,18 @@
   <query>
     <name>AMM_S_GET_CHIAVE_CONFIGURAZIONE</name>
     <value>
-      SELECT		CC.SYSTEM_ID AS ID,
-      CC.VAR_CODICE AS CODICE,
-      CC.VAR_DESCRIZIONE AS DESCRIZIONE,
-      CC.VALORE AS VALORE,
-      CC.TIPO_CHIAVE AS TIPO,
-      CC.CHA_VISIBILE AS CHA_VIS,
-      CC.CHA_MODIFICABILE AS CHA_MOD,
-      CC.CHA_GLOBALE AS CHA_GLOBALE
-      FROM		DPA_CHIAVI_CONFIGURAZIONE CC
-      WHERE	CC.SYSTEM_ID=@idChiave@
-    </value>
+		SELECT		CC.SYSTEM_ID AS ID,
+		CC.ID_AMM AS ID_AMMINISTRAZIONE,
+		CC.VAR_CODICE AS CODICE,
+		CC.VAR_DESCRIZIONE AS DESCRIZIONE,
+		CC.VAR_VALORE AS VALORE,
+		CC.CHA_TIPO_CHIAVE AS TIPO,
+		CC.CHA_VISIBILE AS CHA_VIS,
+		CC.CHA_MODIFICABILE AS CHA_MOD,
+		CC.CHA_GLOBALE AS CHA_GLOBALE
+		FROM		DPA_CHIAVI_CONFIGURAZIONE CC
+		WHERE	CC.SYSTEM_ID=@idChiave@
+	</value>
   </query>
   <query>
     <name>AMM_U_UPDATE_CHIAVE_CONFIGURAZIONE</name>
@@ -23833,7 +23821,7 @@
       WHERE s.PERSONORGROUP in (select g.SYSTEM_ID from GROUPS g where group_id = '@codice_ruolo@')
       AND p.cha_privato = '1'
       AND s.accessrights IN (255, 63)
-      and nvl(p.CHA_IN_CESTINO,'0') != '1'
+		  and ISNULL(p.CHA_IN_CESTINO,'0') != '1'
       AND s.thing = p.system_id
     </value>
   </query>
@@ -23847,7 +23835,7 @@
       AND s.PERSONORGROUP in (select g.SYSTEM_ID from GROUPS g where group_id = '@codice_ruolo@')
       AND p.cha_privato = '0'
       AND s.accessrights IN (255, 63)
-      and nvl(p.CHA_IN_CESTINO,'0') != '1'
+		  and ISNULL(p.CHA_IN_CESTINO,'0') != '1'
       AND s.thing = p.system_id
     </value>
   </query>
@@ -23861,7 +23849,7 @@
       AND s.PERSONORGROUP in (select g.SYSTEM_ID from GROUPS g where group_id = '@codice_ruolo@')
       AND p.cha_privato = '1'
       AND s.accessrights IN (45)
-      and nvl(p.CHA_IN_CESTINO,'0') != '1'
+		  and ISNULL(p.CHA_IN_CESTINO,'0') != '1'
       AND s.thing = p.system_id
     </value>
   </query>
@@ -23875,7 +23863,7 @@
       AND s.PERSONORGROUP in (select g.SYSTEM_ID from GROUPS g where group_id = '@codice_ruolo@')
       AND p.cha_privato = '0'
       AND s.accessrights IN (45)
-      and nvl(p.CHA_IN_CESTINO,'0') != '1'
+		  and ISNULL(p.CHA_IN_CESTINO,'0') != '1'
       AND s.thing = p.system_id
     </value>
   </query>
@@ -23956,7 +23944,8 @@
       ID_TRASM_SINGOLA,
       ID_TRASM_UTENTE,
       DTA_INVIO,
-      TO_CHAR(DTA_INVIO,'dd/mm/yyyy') AS DTAINVIO,
+	  convert(nvarchar (10), DTA_INVIO, 103) AS DTAINVIO,
+      --TO_CHAR(DTA_INVIO,'dd/mm/yyyy') AS DTAINVIO,
       nvl(DTA_SCADENZA,to_date('01/01/1753','dd/mm/yyyy')) AS DTA_SCAD_DESC,
       nvl(DTA_SCADENZA,to_date('01/01/2100','dd/mm/yyyy')) AS DTA_SCAD_ASC,
       nvl(DTA_VISTA,to_date('01/01/1753','dd/mm/yyyy')) AS DTA_VISTA,
@@ -23967,7 +23956,8 @@
       VAR_NOTE_GEN,
       VAR_NOTE_SING,
       DTA_SCADENZA,
-      TO_CHAR(DTA_SCADENZA,'DD/MM/YYYY') AS DTA_SCAD_CHAR,
+	  convert(nvarchar (10), DTA_SCADENZA, 103) AS DTA_SCAD_CHAR,
+      --TO_CHAR(DTA_SCADENZA,'DD/MM/YYYY') AS DTA_SCAD_CHAR,
       ID_PROFILE,
       Vardescribe(ID_PROFILE, 'SEGNATURA_DOCNUMBER')AS SEGNA_DOCNUMBER,
       Vardescribe(ID_PROFILE, 'OGGETTO_MITTENTE')AS OGGETTO_MITTENTE,
@@ -24803,7 +24793,7 @@
       dpa_contatori_doc.anno,
       dpa_contatori_doc.valore_sc,
       (select var_codice from dpa_el_registri where system_id = dpa_contatori_doc.id_aoo or system_id = dpa_contatori_doc.id_rf) as codice_rf_aoo,
-      nvl((select var_desc_registro from dpa_el_registri where system_id = dpa_contatori_doc.id_aoo or system_id = dpa_contatori_doc.id_rf),'Contatore di Tipologia') as desc_rf_aoo
+		  ISNULL((select var_desc_registro from dpa_el_registri where system_id = dpa_contatori_doc.id_aoo or system_id = dpa_contatori_doc.id_rf),'Contatore di Tipologia') as desc_rf_aoo
       from dpa_contatori_doc
       where
       dpa_contatori_doc.id_ogg = @idOggettoCustom@
@@ -25581,10 +25571,10 @@
   <query>
     <name>S_IS_CORR_IN_LISTA_DISTR</name>
     <value>
-      select var_codice, var_desc_corr, @dbuser@.getPeopleName(id_people_liste) as prop, @dbuser@.getCodRuolo(id_gruppo_liste) as ruolo from dpa_corr_globali
-      where cha_tipo_urp = 'L' and
-      system_id in (select id_lista_dpa_corr from dpa_liste_distr where id_dpa_corr = @param1@)
-    </value>
+		select var_codice, var_desc_corr, docsadm.getPeopleName(id_people_liste) as prop, docsadm.getCodRuolo(id_gruppo_liste) as ruolo from dpa_corr_globali
+		where cha_tipo_urp = 'L' and
+		system_id in (select id_lista_dpa_corr from dpa_liste_distr where id_dpa_corr = @param1@)
+	</value>
   </query>
   <query>
     <name>S_FIND_MODELLI</name>
@@ -25723,7 +25713,7 @@
       'Data decreto'
       ) AS DataDec,
       vm.var_prof_oggetto AS Oggetto,
-      NVL (vm.dta_arrivo, dta_protocollo) AS DataArrivo,
+		  ISNULL (vm.dta_arrivo, dta_protocollo) AS DataArrivo,
       vm.tipologia AS Tip, descuo (primo_revisore) AS PrimoRevisore,
       descuo (vm.secondo_revisore) AS SecondoRevisore,
       descuo (magistrato_istruttore) AS MagistratoIstruttore,
@@ -25734,7 +25724,7 @@
       'Controllo Preventivo SCCLA',
       'Data ritorno primo rilievo'
       ) AS DataRitPrimoRil,
-      floor(SYSDATE - NVL (vm.dta_arrivo, dta_protocollo)) AS Giac,
+		  floor(SYSDATE - ISNULL (vm.dta_arrivo, dta_protocollo)) AS Giac,
       vm.data_scadenza_controllo AS DataScadContr,
       getvaloreoggettodb_tipodata
       (953,
@@ -25745,9 +25735,52 @@
       FROM v_cdc_controllo_preventivo vm
       WHERE vm.personorgroup IN (@ufficio@)
       AND vm.stato = 'In esame'
-      @filterCond@
+      @filterCond@ ORDER BY vm.data_scadenza_controllo
     </value>
   </query>
+	
+  <query>
+    <name>CDC_REPORT_DECRETI_IN_ESAME_SRC</name>
+    <value>
+      SELECT
+      vardescribe (vm.system_id, 'SEGNATURA_DOCNUMBER') AS Segnatura,
+      getvaloreoggettodb (953,
+      vm.system_id,
+      'Controllo Preventivo SRC',
+      'Num. Decreto'
+      ) AS NumDec,
+      to_char(getvaloreoggettodb_tipodata
+      (953,
+      vm.system_id,
+      'Controllo Preventivo SRC',
+      'Data decreto'
+      ),'dd/mm/yy') AS DataDec,
+      vm.var_prof_oggetto AS Oggetto,
+      to_char(NVL (vm.dta_arrivo, dta_protocollo),'dd/mm/yy') AS DataArrivo,
+      vm.tipologia AS Tip, descuo (revisore) AS Revisore,
+      descuo (magistrato_istruttore) AS MagistratoIstruttore,
+      to_char(vm.data_primo_rilievo,'dd/mm/yy') AS DataPrimoRilievo,
+      to_char(getvaloreoggettodb_tipodata
+      (953,
+      vm.system_id,
+      'Controllo Preventivo SRC',
+      'Data ritorno primo rilievo'
+      ),'dd/mm/yy') AS DataRitPrimoRil,
+      floor(SYSDATE - NVL (vm.dta_arrivo, dta_protocollo)) AS Giac,
+      to_char(vm.data_scadenza_controllo,'dd/mm/yy') AS DataScadContr,
+      to_char(getvaloreoggettodb_tipodata
+      (953,
+      vm.system_id,
+      'Controllo Preventivo SRC',
+      'Data scadenza Amministrazione'
+      ),'dd/mm/yy') AS DataScadAmm
+      FROM mv_cdc_controllo_prev_src vm
+      WHERE vm.personorgroup IN (@ufficio@)
+      AND vm.stato = 'In esame'
+      @filterCond@  ORDER BY vm.data_scadenza_controllo
+    </value>
+  </query>
+		
   <query>
     <name>CDC_REPORT_DECRETI_PERVENUTI_IN_INT_TEMPORALE</name>
     <value>
@@ -25765,7 +25798,7 @@
       'Data decreto'
       ) AS DataDec,
       vm.var_prof_oggetto AS oggetto,
-      NVL (vm.dta_arrivo, dta_protocollo) AS dataarrivo, vm.tipologia AS tip,
+		  ISNULL (vm.dta_arrivo, dta_protocollo) AS dataarrivo, vm.tipologia AS tip,
       descuo (primo_revisore) AS primorevisore,
       descuo (vm.secondo_revisore) AS secondorevisore,
       descuo (magistrato_istruttore) AS magistratoistruttore, vm.stato as stato,
@@ -25777,7 +25810,7 @@
       'Data ritorno primo rilievo'
       ) AS dataritornoprimorilievo,
       vm.data_secondo_rilievo,
-      floor(SYSDATE - NVL (vm.dta_arrivo, dta_protocollo)) AS giac,
+		  floor(SYSDATE - ISNULL (vm.dta_arrivo, dta_protocollo)) AS giac,
       vm.data_restituz_amministrazione AS datarestamm,
       vm.data_registrazione AS datareg,
       vm.data_scadenza_controllo AS datascadcontrollo,
@@ -26402,33 +26435,33 @@
   <query>
     <name>COPY_VISIBILITY</name>
     <value>
-      insert  /*+ parallel(security,4) append */  into security (thing, accessrights, personorgroup, cha_tipo_diritto, var_note_sec)
-      (
-      SELECT
-      DISTINCT(thing),
-      accessrights,
-      @idGruppoRuoloDestinatario@ as PERSONORGROUP,
-      'A' as CHA_TIPO_DIRITTO,
-      'ACQUISITO PER COPIA VISIBILITA' as VAR_NOTE_SEC
-      FROM security  WITH (nolock) , @objType@
-      WHERE
-      security.thing = @objType@.system_id
-      @projectSelect@
-      AND
-      personorgroup = @idGruppoRuoloOrigine@
-      AND
-      accessrights > 20
-      @condizioneDocFasc@
-      @condizioneIdRegistro@
-      @condizioneAtipicita@
-      @codizioneVisibilita@
-      --Condizione di non esistenza
-      AND NOT EXISTS
-      (
-      select 'x' from security  WITH (nolock)  where thing = @objType@.system_id and personorgroup = @idGruppoRuoloDestinatario@
-      )
-      )
-    </value>
+		insert  /*+ parallel(security,4) append */  into security (thing, accessrights, personorgroup, cha_tipo_diritto, var_note_sec)
+		(
+		SELECT
+		DISTINCT(thing),
+		accessrights,
+		@idGruppoRuoloDestinatario@ as PERSONORGROUP,
+		'A' as CHA_TIPO_DIRITTO,
+		'ACQUISITO PER COPIA VISIBILITA' as VAR_NOTE_SEC, @idGruppoRuoloOrigine@ as id_gruppo_orig, '1' as cha_copia_visibilita
+		FROM security  WITH (nolock) , @objType@
+		WHERE
+		security.thing = @objType@.system_id
+		@projectSelect@
+		AND
+		personorgroup = @idGruppoRuoloOrigine@
+		AND
+		accessrights > 20
+		@condizioneDocFasc@
+		@condizioneIdRegistro@
+		@condizioneAtipicita@
+		@codizioneVisibilita@
+		--Condizione di non esistenza
+		AND NOT EXISTS
+		(
+		select 'x' from security  WITH (nolock)  where thing = @objType@.system_id and personorgroup = @idGruppoRuoloDestinatario@
+		)
+		)
+	</value>
   </query>
   <query>
     <name>GET_ID_GRUPPO_RUOLI_SUP</name>
@@ -26524,14 +26557,15 @@
   <query>
     <name>COUNT_DELEGHE_ATTIVE_E_IN_ESERCIZIO_UTENTE</name>
     <value>
-      SELECT COUNT(*)
-      FROM dpa_deleghe d
-      WHERE (d.id_people_delegato = @idPeople@ AND d.cha_in_esercizio = 1) -- L'utente sta esercitando delle deleghe
-      OR     (    d.id_people_delegante = @idPeople@
-      AND d.id_ruolo_delegante = @idRole@
-      AND d.cha_in_esercizio = 1
-      ) -- L'utente ha delegato qualcuno
-      AND d.data_decorrenza &lt; GETDATE()
+		SELECT COUNT(*)
+		FROM dpa_deleghe d
+		WHERE ( (d.id_people_delegato = @idPeople@ AND d.cha_in_esercizio = 1 and d.id_ruolo_delegato = @idRole@
+		) -- L'utente sta esercitando delle deleghe
+		OR     (    d.id_people_delegante = @idPeople@
+		)AND d.id_ruolo_delegante = @idRole@
+		AND d.cha_in_esercizio = 1
+		) -- L'utente ha delegato qualcuno
+		AND d.data_decorrenza &lt; GETDATE()
       AND (d.data_scadenza &gt;  GETDATE() OR d.data_scadenza IS NULL)
     </value>
   </query>
@@ -27454,66 +27488,68 @@
   <query>
     <name>COPY_VISIBILITY_FASC</name>
     <value>
-      INSERT
-      /*+ parallel(security,4) append */
-      INTO security
-      (
-      THING,
-      ACCESSRIGHTS,
-      PERSONORGROUP,
-      CHA_TIPO_DIRITTO,
-      VAR_NOTE_SEC
-      )
-      (SELECT P1.SYSTEM_ID,
-      ACCESSRIGHTS,
-      @idGruppoRuoloDestinatario@,
-      'A',
-      'ACQUISITO PER COPIA VISIBILITA'
-      FROM
-      (SELECT /*+index (s) */ THING,
-      ACCESSRIGHTS
-      FROM security as S  WITH (nolock) ,
-      project P
-      where S.THING             = P.SYSTEM_ID
-      AND S.PERSONORGROUP       = @idGruppoRuoloOrigine@
-      @codizioneVisibilita@
-      AND (P.CHA_TIPO_FASCICOLO = 'P'
-      OR p.CHA_TIPO_FASCICOLO  IS NULL)
-      AND S.ACCESSRIGHTS        > 20
-      and P.CHA_TIPO_PROJ       = 'F'
-      @regCond@
-      @condizioneAtipicita@
-      AND NOT EXISTS
-      (SELECT /*+index (p1) */ 'x'
-      FROM project p1
-      WHERE P1.system_id        = P.ID_FASCICOLO
-      AND P1.CHA_TIPO_FASCICOLO = 'G'
-      )
-      AND EXISTS
-      (SELECT /*+index (t) */ 'x'
-      FROM project T
-      WHERE t.system_id =p.id_parent
-      AND cha_tipo_proj ='T'
-      AND EXISTS
-      (SELECT /*+index (s) */ 'x'
-      from security as S  WITH (nolock)
-      WHERE s.PERSONORGROUP IN ( @idGruppoRuoloDestinatario@ )
-      AND accessrights       > 20
-      AND s.thing            = T.SYSTEM_ID
-      )
-      )
-      AND NOT EXISTS
-      (SELECT /*+index (s) */ 'x'
-      FROM security  WITH (nolock)
-      where security.THING       = P.SYSTEM_ID
-      AND security.PERSONORGROUP = @idGruppoRuoloDestinatario@
-      )
-      ) t1,
-      project P1
-      WHERE P1.ID_FASCICOLO = thing
-      OR P1.SYSTEM_ID       = THING
-      )
-    </value>
+		INSERT
+		/*+ parallel(security,4) append */
+		INTO security
+		(
+		THING,
+		ACCESSRIGHTS,
+		PERSONORGROUP,
+		CHA_TIPO_DIRITTO,
+		VAR_NOTE_SEC
+		)
+		(SELECT P1.SYSTEM_ID,
+		ACCESSRIGHTS,
+		@idGruppoRuoloDestinatario@,
+		'A',
+		'ACQUISITO PER COPIA VISIBILITA',
+		@idGruppoRuoloOrigine@,
+		'1'
+		FROM
+		(SELECT /*+index (s) */ THING,
+		ACCESSRIGHTS
+		FROM security as S  WITH (nolock) ,
+		project P
+		where S.THING             = P.SYSTEM_ID
+		AND S.PERSONORGROUP       = @idGruppoRuoloOrigine@
+		@codizioneVisibilita@
+		AND (P.CHA_TIPO_FASCICOLO = 'P'
+		OR p.CHA_TIPO_FASCICOLO  IS NULL)
+		AND S.ACCESSRIGHTS        > 20
+		and P.CHA_TIPO_PROJ       = 'F'
+		@regCond@
+		@condizioneAtipicita@
+		AND NOT EXISTS
+		(SELECT /*+index (p1) */ 'x'
+		FROM project p1
+		WHERE P1.system_id        = P.ID_FASCICOLO
+		AND P1.CHA_TIPO_FASCICOLO = 'G'
+		)
+		AND EXISTS
+		(SELECT /*+index (t) */ 'x'
+		FROM project T
+		WHERE t.system_id =p.id_parent
+		AND cha_tipo_proj ='T'
+		AND EXISTS
+		(SELECT /*+index (s) */ 'x'
+		from security as S  WITH (nolock)
+		WHERE s.PERSONORGROUP IN ( @idGruppoRuoloDestinatario@ )
+		AND accessrights       > 20
+		AND s.thing            = T.SYSTEM_ID
+		)
+		)
+		AND NOT EXISTS
+		(SELECT /*+index (s) */ 'x'
+		FROM security  WITH (nolock)
+		where security.THING       = P.SYSTEM_ID
+		AND security.PERSONORGROUP = @idGruppoRuoloDestinatario@
+		)
+		) t1,
+		project P1
+		WHERE P1.ID_FASCICOLO = thing
+		OR P1.SYSTEM_ID       = THING
+		)
+	</value>
   </query>
   <query>
     <name>CALCOLA_ATIP_COPIA</name>
@@ -29902,8 +29938,8 @@
     <value>
       /* Formatted on 2012/07/23 15:59 (Formatter Plus v4.8.8) */
       SELECT   p.system_id, p.id_amm, p.id_utente_creatore, p.id_ruolo_creatore,
-      TO_CHAR (p.data_esecuzione,      'dd/mm/yyyy HH24:mi:ss'      ) AS data_esecuzione,
-      TO_CHAR (p.data_fine, 'dd/mm/yyyy HH24:mi:ss') AS data_fine,
+      format (p.data_esecuzione,      'dd/mm/yyyy HH24:mi:ss'      ) AS data_esecuzione,
+      format (p.data_fine, 'dd/mm/yyyy HH24:mi:ss') AS data_fine,
       p.num_doc,
       p.descrizione,
       SUM (CASE a.esito
@@ -29931,10 +29967,11 @@
       THEN 1
       ELSE 0
       END) AS errori
-      FROM dpa_pregressi p, dpa_ass_pregressi a
-      WHERE p.id_amm =  @id_amm@ AND p.system_id = a.id_pregresso(+) AND p.id_amm =  @id_amm@
+      FROM dpa_pregressi p LEFT JOIN dpa_ass_pregressi a
+	  ON p.system_id = a.id_pregresso
+      WHERE p.id_amm = @id_amm@ 
       @daAmm@
-      GROUP BY (p.system_id,
+      GROUP BY p.system_id,
       p.id_amm,
       p.id_utente_creatore,
       p.id_ruolo_creatore,
@@ -29942,7 +29979,6 @@
       p.data_fine,
       p.num_doc,
       p.descrizione
-      )
       ORDER BY (p.system_id) DESC
     </value>
   </query>
@@ -35097,7 +35133,7 @@
   <query>
     <name>APSS_SOLR_GET_LASTEXECUTIONDATE</name>
     <value>
-      select to_char(max(ExecutionDate),'dd/mm/yyyy hh24:mi:ss') as LASTEXECUTIONDATE
+      select format(max(ExecutionDate),'dd/mm/yyyy hh24:mi:ss') as LASTEXECUTIONDATE
       from DPA_INTEGR_APSS_DEL_DET
       where idTipoAtto @TipoAtto@
     </value>
@@ -35132,12 +35168,13 @@
   <query>
     <name>APSS_SOLR_CTRL_ATTACH_EXT</name>
     <value>
-      SELECT A.VAR_NOMEORIGINALE AS NOMEFILE
-      FROM COMPONENTS A
-      WHERE A.DOCNUMBER IN
-      (SELECT SYSTEM_ID FROM PROFILE WHERE ID_DOCUMENTO_PRINCIPALE =@param1@)
-      AND A.VERSION_ID= (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.DOCNUMBER)
-    </value>
+		SELECT A.VAR_NOMEORIGINALE AS NOMEFILE,
+		A.PATH AS NOMEPATH
+		FROM COMPONENTS A
+		WHERE A.DOCNUMBER IN
+		(SELECT SYSTEM_ID FROM PROFILE WHERE ID_DOCUMENTO_PRINCIPALE =@param1@)
+		AND A.VERSION_ID= (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.DOCNUMBER)
+	</value>
   </query>
   <query>
     <name>APSS_SOLR_U_ESITO_PUBB</name>
@@ -35562,8 +35599,8 @@
     <value>
       SELECT COUNT(A.SYSTEM_ID) FROM PROFILE A
       @queryFrom@
-      WHERE @dbuser@.getchaimg(A.DOCNUMBER) != '0'
-      AND nvl(A.CHA_IN_CESTINO,'0')='0'
+		 WHERE DOCSADM.getchaimg(A.DOCNUMBER) != '0'
+		 AND ISNULL(A.CHA_IN_CESTINO,'0')='0'
       AND NOT EXISTS(SELECT 'x' FROM DPA_CHECKIN_CHECKOUT WHERE ID_DOCUMENT=A.SYSTEM_ID)
       @filtri@
     </value>
@@ -35577,8 +35614,8 @@
       CONVERT(CHAR, A.DTA_PROTO, 103) AS DATA_PROTO
       FROM PROFILE A
       @queryFrom@
-      WHERE @dbuser@.getchaimg(A.DOCNUMBER) != '0'
-      AND nvl(A.CHA_IN_CESTINO,'0')='0'
+		 WHERE DOCSADM.getchaimg(A.DOCNUMBER) != '0'
+		 AND ISNULL(A.CHA_IN_CESTINO,'0')='0'
       AND NOT EXISTS(SELECT 'x' FROM DPA_CHECKIN_CHECKOUT WHERE ID_DOCUMENT=A.SYSTEM_ID)
       @filtri@
     </value>
@@ -35634,6 +35671,48 @@
       AND CAST(CONVERT(CHAR, E.data_prossima_esecuzione, 103) AS DATETIME) &lt;= CAST(CONVERT(CHAR, GETDATE(), 103), AS DATETIME)
     </value>
   </query>
+	<query>
+		<name>S_CONFIG_REPORT_CONSERVAZIONE</name>
+		<value>
+			SELECT VAR_FIXED_RECIPIENTS, CHA_ATTIVA_STRUTTURA, CHA_MAIL_STRUTTURA, MAIL_SUBJECT, MAIL_BODY,
+			VAR_SMTP_SERVER, VAR_MAIL_FROM, VAR_USERNAME_SMTP, VAR_PASSWORD_SMTP, VAR_PORT_SMTP, CHA_SSL,
+			CHA_MAIL_POLICY, VAR_POLICY_MAIL_SUBJECT, VAR_POLICY_MAIL_BODY
+			FROM DPA_REPORT_VERSAMENTO
+			WHERE ID_AMM=@idAmm@
+		</value>
+	</query>
+	<query>
+		<name>S_MAIL_STRUTTURA</name>
+		<value>
+			SELECT CHA_MAIL_STRUTTURA, VAR_SMTP_SERVER, VAR_MAIL_FROM, VAR_USERNAME_SMTP, VAR_PASSWORD_SMTP, VAR_PORT_SMTP, CHA_SSL, CHA_MAIL_POLICY
+			FROM DPA_REPORT_VERSAMENTO
+			WHERE ID_AMM=@idAmm@
+		</value>
+	</query>
+	<query>
+		<name>I_MAIL_STRUTTURA</name>
+		<value>
+			INSERT INTO DPA_REPORT_VERSAMENTO
+			(ID_AMM, CHA_MAIL_STRUTTURA, VAR_SMTP_SERVER, VAR_MAIL_FROM, VAR_USERNAME_SMTP, VAR_PASSWORD_SMTP, VAR_PORT_SMTP, CHA_SSL, CHA_MAIL_POLICY)
+			VALUES
+			('@idAmm@', '@mailString@', '@smtp_server@', '@mail_from@', '@username@', '@password@', '@port@', '@ssl@', '@policy_mailString@')
+		</value>
+	</query>
+	<query>
+		<name>U_MAIL_STRUTTURA</name>
+		<value>
+			UPDATE DPA_REPORT_VERSAMENTO
+			SET CHA_MAIL_STRUTTURA='@mailString@',
+			VAR_SMTP_SERVER='@smtp_server@',
+			VAR_MAIL_FROM='@mail_from@',
+			VAR_USERNAME_SMTP='@username@',
+			VAR_PASSWORD_SMTP='@password@',
+			VAR_PORT_SMTP='@port@',
+			CHA_SSL='@ssl@',
+			CHA_MAIL_POLICY = '@policy_mailString@'
+			WHERE ID_AMM='@idAmm@'
+		</value>
+	</query>
   <query>
     <name>S_USER_GET_LIST_RESP_PRINT_REP</name>
     <value>
@@ -35977,20 +36056,12 @@
   <query>
     <name>D_DPA_PROCESSO_FIRMA_VISIBILITA</name>
     <value>
-      DELETE
-      FROM DPA_PROCESSO_FIRMA_VISIBILITA
-      WHERE id_processo=@idProcesso@
-      AND ID_GROUPS    =
-      (SELECT
-      CASE
-      WHEN CHA_TIPO_URP= 'R'
-      THEN g.ID_GRUPPO
-      ELSE G.ID_PEOPLE
-      END
-      FROM DPA_CORR_GLOBALI G
-      WHERE G.SYSTEM_ID =@idCorr@
-      )
-    </value>
+		DELETE
+		FROM DPA_PROCESSO_FIRMA_VISIBILITA
+		WHERE id_processo=@idProcesso@
+		AND ID_GROUPS = @idGruppo@
+		)
+	</value>
   </query>
   <query>
     <name>S_GET_USERS_IN_ROLE_BY_IDGRUPPO</name>
@@ -36659,13 +36730,13 @@
       P.ID_RUOLO_PROPONENTE AS ID_GRUPPO,
       P.CHA_INTERROTTO_DA,
       P.ID_PEOPLE_DELEGATO,
-      GETDESCRUOLO(P.ID_RUOLO_PROPONENTE) AS Group_Name,
-      getcodRuolo(P.ID_RUOLO_PROPONENTE) as Group_Id,
-      getRuoloSystemIdCorr(P.ID_RUOLO_PROPONENTE) as Id_Corr,
+      docsadm.GETDESCRUOLO(P.ID_RUOLO_PROPONENTE) AS Group_Name,
+      docsadm.getcodRuolo(P.ID_RUOLO_PROPONENTE) as Group_Id,
+      docsadm.getRuoloSystemIdCorr(P.ID_RUOLO_PROPONENTE) as Id_Corr,
       P.ID_UTENTE_PROPONENTE AS ID_UTENTE,
-      getpeopleuserid(P.ID_UTENTE_PROPONENTE) AS USER_CODE,
-      getpeoplename(P.ID_UTENTE_PROPONENTE) AS USER_DESCRIPTION,
-      getCorrSystemId(P.ID_UTENTE_PROPONENTE) AS USER_SYSTEM_ID
+      docsadm.getpeopleuserid(P.ID_UTENTE_PROPONENTE) AS USER_CODE,
+      docsadm.getpeoplename(P.ID_UTENTE_PROPONENTE) AS USER_DESCRIPTION,
+      docsadm.getCorrSystemId(P.ID_UTENTE_PROPONENTE) AS USER_SYSTEM_ID
       FROM DPA_ISTANZA_PROCESSO_FIRMA P
       WHERE ID_ISTANZA = @idIstanzaProcesso@
     </value>
@@ -37251,13 +37322,13 @@
       P.MOTIVO_RESPINGIMENTO, P.DOC_ALL, P.ID_DOCUMENTO,
       P.ID_RUOLO_PROPONENTE AS ID_GRUPPO,
       P.CHA_CAMBIO_STATO_DIAG,
-      GETDESCRUOLO(P.ID_RUOLO_PROPONENTE) AS Group_Name,
-      getcodRuolo(P.ID_RUOLO_PROPONENTE) as Group_Id,
-      getRuoloSystemIdCorr(P.ID_RUOLO_PROPONENTE) as Id_Corr,
+      docsadm.GETDESCRUOLO(P.ID_RUOLO_PROPONENTE) AS Group_Name,
+      docsadm.getcodRuolo(P.ID_RUOLO_PROPONENTE) as Group_Id,
+      docsadm.getRuoloSystemIdCorr(P.ID_RUOLO_PROPONENTE) as Id_Corr,
       P.ID_UTENTE_PROPONENTE AS ID_UTENTE,
-      getpeopleuserid(P.ID_UTENTE_PROPONENTE) AS USER_CODE,
-      getpeoplename(P.ID_UTENTE_PROPONENTE) AS USER_DESCRIPTION,
-      getCorrSystemId(P.ID_UTENTE_PROPONENTE) AS USER_SYSTEM_ID
+      docsadm.getpeopleuserid(P.ID_UTENTE_PROPONENTE) AS USER_CODE,
+      docsadm.getpeoplename(P.ID_UTENTE_PROPONENTE) AS USER_DESCRIPTION,
+      docsadm.getCorrSystemId(P.ID_UTENTE_PROPONENTE) AS USER_SYSTEM_ID
       From Dpa_Istanza_Processo_Firma P
       Inner Join Dpa_Istanza_Passo_Firma Pf
       On P.Id_Istanza = Pf.Id_Istanza_Processo
@@ -40283,7 +40354,7 @@
       AND ID_RUOLO_COINVOLTO = @idRuoloTitolare@
       AND STATO_PASSO IN ('NEW', 'LOOK')
       AND EXISTS(SELECT 'X' FROM DPA_ISTANZA_PROCESSO_FIRMA P WHERE P.ID_ISTANZA = ID_ISTANZA_PROCESSO
-      AND NVL(P.CONCLUSO_IL,'0')='0' AND P.STATO = 'IN_EXEC')
+      AND ISNULL(P.CONCLUSO_IL,'0')='0' AND P.STATO = 'IN_EXEC')
     </value>
   </query>
   <query>
@@ -40293,7 +40364,7 @@
       SET ID_UTENTE_TITOLARE = @idUtenteTitolareNew@
       WHERE ID_UTENTE_TITOLARE = @idUtenteTitolareOld@
       AND ID_RUOLO_TITOLARE = @idRuoloTitolare@
-      AND NVL(DTA_ESECUZIONE,'0')='0'
+      AND ISNULL(DTA_ESECUZIONE,'0')='0'
     </value>
   </query>
   <query>
@@ -41763,6 +41834,62 @@
       )
     </value>
   </query>
+	<query>
+		<name>S_DPA_DESCRIZIONI_FASC_COUNT</name>
+		<value>
+			SELECT COUNT(D.SYSTEM_ID)
+			FROM DPA_DESCRIZIONI_FASC D
+			WHERE D.ID_AMM=@idAmm@
+			@condition@
+		</value>
+	</query>
+	<query>
+		<name>S_DPA_DESCRIZIONI_FASC</name>
+		<value>
+			SELECT A.*
+			FROM
+			(SELECT
+			interna.*, ROWNUM rnum
+			FROM (SELECT
+			D.SYSTEM_ID,
+			D.VAR_DESCRIZIONE,
+			D.VAR_CODICE,
+			D.ID_REGISTRO,
+			D.ID_AMM,
+			R.VAR_CODICE AS CODICE_REGISTRO
+			FROM DPA_DESCRIZIONI_FASC D LEFT JOIN DPA_EL_REGISTRI R ON D.ID_REGISTRO = R.SYSTEM_ID
+			WHERE D.ID_AMM=@idAmm@
+			@condition@
+			ORDER BY D.VAR_DESCRIZIONE ASC) INTERNA
+			@paging@
+		</value>
+	</query>
+	<query>
+		<name>U_DPA_DESCRIZIONI_FASC</name>
+		<value>
+			UPDATE DPA_DESCRIZIONI_FASC
+			SET VAR_DESCRIZIONE = '@descrizione@',
+			VAR_CODICE='@codice@'
+			WHERE SYSTEM_ID = @systemId@
+		</value>
+	</query>
+	<query>
+		<name>D_DPA_DESCRIZIONI_FASC</name>
+		<value>
+			DELETE FROM DPA_DESCRIZIONI_FASC
+			WHERE SYSTEM_ID=@systemId@
+		</value>
+	</query>
+	<query>
+		<name>S_DPA_DESCRIZIONI_FASC_BY_DESC</name>
+		<value>
+			SELECT COUNT(D.SYSTEM_ID)
+			FROM DPA_DESCRIZIONI_FASC D
+			WHERE @descrizione@
+			AND D.ID_REGISTRO = @idRegistro@
+			AND D.ID_AMM = @idAmm@ AND D.SYSTEM_ID &lt; &gt; @systemId@
+		</value>
+	</query>
   <query>
     <name>S_REGISTRO_ACCESSI</name>
     <value>
@@ -41917,7 +42044,7 @@
       SELECT P.ID_PASSO
       FROM DPA_PASSO_DI_FIRMA P, DPA_VIS_MAIL_REGISTRI L, DPA_MAIL_REGISTRI M
       WHERE P.ID_RUOLO_COINVOLTO = @idGruppo@ AND P.ID_MAIL_REGISTRO = M.SYSTEM_ID
-      AND L.ID_RUOLO_IN_UO = @idRuoloInUO@ AND L.ID_REGISTRO AND @idRegistro@ AND CHA_SPEDISCI = '1'
+      AND L.ID_RUOLO_IN_UO = @idRuoloInUO@ AND L.ID_REGISTRO = @idRegistro@ AND CHA_SPEDISCI = '1'
       AND L.ID_REGISTRO = P.ID_RF AND L.VAR_EMAIL_REGISTRO = '@emailRegistro@'
       AND M.ID_REGISTRO = @idRegistro@ AND M.VAR_EMAIL_REGISTRO = '@emailRegistro@'
     </value>
@@ -42055,5 +42182,497 @@
       AND C.CHA_IN_TODOLIST='1'
     </value>
   </query>
+<!-- ALBO TELEMATICO -->
+  <query>
+    <name>ALBO_S_DA_NOTIFICARE</name>
+    <value>
+      SELECT L.VAR_CODICE_AMM AS CODE_AMM,
+      A.DOC_NUMBER AS ID_DOC,
+      B.VAR_DESCRIZIONE AS STATO_DOC,
+      B.ID_DIAGRAMMA AS ID_DIAGRAMMA,
+      format(C.CREATION_DATE,'dd/mm/yyyy hh24:mi:ss') as data_creazione,
+      C.EXT, D.USER_ID,
+      E.VAR_COD_RUBRICA AS USER_RUOLO,
+      G.VALORE_OGGETTO_DB AS DURATA,
+      I.VALORE_OGGETTO_DB AS DATA_PUBB,
+      (SELECT COUNT(*) FROM PROFILE ax, versions ay  WHERE ax.ID_DOCUMENTO_PRINCIPALE = c.system_id AND (ax.EXT IS NOT NULL AND UPPER(ax.EXT) !='PDF') and ax.system_id = ay.docnumber and ay.cha_allegati_esterno='0') AS ALL_NON_VALIDI
+      FROM DPA_DIAGRAMMI A, DPA_STATI B, PROFILE C ,PEOPLE D ,
+      DPA_CORR_GLOBALI E, DPA_OGGETTI_CUSTOM F, DPA_ASSOCIAZIONE_TEMPLATES G, DPA_OGGETTI_CUSTOM H, DPA_ASSOCIAZIONE_TEMPLATES I, DPA_AMMINISTRA L
+      WHERE A.ID_STATO= B.SYSTEM_ID
+      AND A.ID_DIAGRAMMA IN (SELECT SYSTEM_ID FROM DPA_DIAGRAMMI_STATO WHERE VAR_DESCRIZIONE LIKE 'ALT%')
+      AND UPPER(B.VAR_DESCRIZIONE) IN ('DA PUBBLICARE','DA REVOCARE', 'DA ANNULLARE')
+      AND A.DOC_NUMBER=C.SYSTEM_ID
+      AND C.AUTHOR = D.SYSTEM_ID
+      AND C.ID_RUOLO_CREATORE= E.SYSTEM_ID
+      AND UPPER(F.DESCRIZIONE)='DURATA'
+      AND F.SYSTEM_ID= G.ID_OGGETTO
+      AND G.DOC_NUMBER= C.SYSTEM_ID
+      AND UPPER(H.DESCRIZIONE)='DATA DI PUBBLICAZIONE'
+      AND H.SYSTEM_ID= I.ID_OGGETTO
+      AND I.DOC_NUMBER= C.SYSTEM_ID
+      AND C.SYSTEM_ID > @min_id_doc@
+      AND L.SYSTEM_ID = E.ID_AMM
+      ORDER BY C.SYSTEM_ID
+    </value>
+  </query>
+  <query>
+    <name>ALBO_UTN_S_DA_NOTIFICARE</name>
+    <value>
+      SELECT L.VAR_CODICE_AMM AS CODE_AMM,
+      A.DOC_NUMBER AS ID_DOC,
+      B.VAR_DESCRIZIONE AS STATO_DOC,
+      B.ID_DIAGRAMMA AS ID_DIAGRAMMA,
+	  format(C.CREATION_DATE,'dd/mm/yyyy hh24:mi:ss') as data_creazione,
+      C.EXT, D.USER_ID,
+      E.VAR_COD_RUBRICA AS USER_RUOLO,
+      G.VALORE_OGGETTO_DB AS DURATA,
+      I.VALORE_OGGETTO_DB AS DATA_PUBB,
+      (SELECT COUNT(*) FROM PROFILE ax, versions ay  WHERE ax.ID_DOCUMENTO_PRINCIPALE = c.system_id AND (ax.EXT IS NOT NULL AND UPPER(ax.EXT) !='PDF') and ax.system_id = ay.docnumber and ay.cha_allegati_esterno='0') AS ALL_NON_VALIDI
+      FROM DPA_DIAGRAMMI A, DPA_STATI B, PROFILE C ,PEOPLE D ,
+      DPA_CORR_GLOBALI E, DPA_OGGETTI_CUSTOM F, DPA_ASSOCIAZIONE_TEMPLATES G, DPA_OGGETTI_CUSTOM H, DPA_ASSOCIAZIONE_TEMPLATES I, DPA_AMMINISTRA L
+      WHERE A.ID_STATO= B.SYSTEM_ID
+      AND A.ID_DIAGRAMMA IN (SELECT SYSTEM_ID FROM DPA_DIAGRAMMI_STATO WHERE VAR_DESCRIZIONE LIKE 'ALT%')
+      AND UPPER(B.VAR_DESCRIZIONE) IN ('DA PUBBLICARE', 'DA ANNULLARE')
+      AND A.DOC_NUMBER=C.SYSTEM_ID
+      AND C.AUTHOR = D.SYSTEM_ID
+      AND C.ID_RUOLO_CREATORE= E.SYSTEM_ID
+      AND UPPER(F.DESCRIZIONE) LIKE 'DURATA DI PUBBLICAZIONE%'
+      AND F.SYSTEM_ID= G.ID_OGGETTO
+      AND G.DOC_NUMBER= C.SYSTEM_ID
+      AND UPPER(H.DESCRIZIONE)='DATA DI PUBBLICAZIONE'
+      AND H.SYSTEM_ID= I.ID_OGGETTO
+      AND I.DOC_NUMBER= C.SYSTEM_ID
+      AND C.SYSTEM_ID > @min_id_doc@
+      AND L.SYSTEM_ID = E.ID_AMM
+      ORDER BY C.SYSTEM_ID
+    </value>
+  </query>
+  <!-- FINE ALBO TELEMATICO-->
+<!-- CERCA TRE-->
+  <query>
+    <name>C3_GET_DOCS</name>
+    <value>
+      SELECT A.SYSTEM_ID,
+      A.DOCNAME,
+      A.NUM_PROTO,
+      A.NUM_ANNO_PROTO,
+      A.CHA_TIPO_PROTO,
+      format(A.DTA_PROTO, 'DD/MM/YYYY HH24:MI:SS') AS DATAPROTO,
+      format(A.CREATION_DATE, 'DD/MM/YYYY HH24:MI:SS') AS DATACREAZIONE,
+      (SELECT top(1) concat(SYSTEM_ID,'§',VAR_CODICE,'§',VAR_DESC_REGISTRO,'§',CHA_RF) FROM DPA_EL_REGISTRI WHERE SYSTEM_ID = A.ID_REGISTRO) AS REGISTRO,
+      (SELECT top(1) FULL_NAME FROM PEOPLE WHERE SYSTEM_ID = A.AUTHOR) AS AUTORE,
+      A.AUTHOR AS IDAUTORE,
+      (SELECT top(1) DCG.VAR_DESC_CORR FROM DPA_CORR_GLOBALI DCG, SECURITY SEC WHERE SEC.THING= A.SYSTEM_ID AND SEC.PERSONORGROUP = DCG.ID_GRUPPO AND SEC.ACCESSRIGHTS = 255) AS RUOLOCREATORE,
+      (SELECT top(1) PERSONORGROUP+1 FROM SECURITY WHERE THING = A.SYSTEM_ID AND ACCESSRIGHTS=255) AS IDRUOLOAUTORE,
+      (SELECT top(1) VAR_DESC_CORR FROM DPA_CORR_GLOBALI WHERE SYSTEM_ID = A.ID_UO_CREATORE) AS UOCREATRICE,
+      (SELECT top(1) concat(SYSTEM_ID,'§',VAR_DESC_ATTO) FROM DPA_TIPO_ATTO WHERE SYSTEM_ID = A.ID_TIPO_ATTO) AS TIPOLOGIA,
+      docsadm.corrcat(A.SYSTEM_ID,A.CHA_TIPO_PROTO) MITT_DEST,
+      (SELECT top(1) concat(X.VAR_NOMEORIGINALE,'§',Y.VERSION_LABEL,'§', Z.MIME_TYPE,'§',X.VERSION_ID,'§',SUBSTRING(X.PATH,CHARINDEX(X.PATH,'\',-1)+1 ,LEN(X.PATH)),'§',X.FILE_SIZE)
+      FROM COMPONENTS X, VERSIONS Y, APPS Z WHERE
+      X.VERSION_ID = Y.VERSION_ID AND
+      UPPER(X.EXT)= UPPER(Z.DEFAULT_EXTENSION) AND
+      Z.MIME_TYPE IS NOT NULL AND
+      Y.VERSION_ID = (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.SYSTEM_ID)
+      AND X.DOCNUMBER=A.SYSTEM_ID) AS DOC_PRINCIPALE,
+      (SELECT COUNT(*) FROM PROFILE WHERE ID_DOCUMENTO_PRINCIPALE = A.SYSTEM_ID) AS NUM_ALLEGATI,
+      A.VAR_PROF_OGGETTO AS OGGETTO
+      FROM PROFILE A
+      WHERE
+      @dateLimits@
+      AND A.ID_DOCUMENTO_PRINCIPALE IS NULL
+      AND A.CHA_IN_CESTINO IS NULL
+      ORDER BY A.SYSTEM_ID
+    </value>
+  </query>
+  <query>
+    <name>C3_GET_ALLEGATI_BY_IDDOC</name>
+    <value>
+      SELECT A.SYSTEM_ID,
+      A.CHA_IN_CESTINO,
+      A.DOCNAME,
+      format(A.CREATION_DATE, 'DD/MM/YYYY HH24:MI') AS DATACREAZIONE,
+      (SELECT top(1) concat(X.VAR_NOMEORIGINALE ,'§', Y.VERSION_LABEL ,'§',  Z.MIME_TYPE ,'§', X.VERSION_ID ,'§', SUBSTRING(X.PATH,CHARINDEX(X.PATH,'\',-1)+1 ,LEN(X.PATH)) ,'§', X.FILE_SIZE)
+      FROM COMPONENTS X, VERSIONS Y, APPS Z WHERE
+      X.VERSION_ID = Y.VERSION_ID AND
+      UPPER(X.EXT)= UPPER(Z.DEFAULT_EXTENSION) AND
+      Z.MIME_TYPE IS NOT NULL AND
+      Y.VERSION_ID = (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.SYSTEM_ID)
+      AND X.DOCNUMBER=A.SYSTEM_ID) AS FILE_ALLEGATO,
+      A.VAR_PROF_OGGETTO AS OGGETTO
+      FROM PROFILE A
+      WHERE
+      A.ID_DOCUMENTO_PRINCIPALE = @idDoc@
+      AND A.CHA_IN_CESTINO IS NULL
+      ORDER BY A.SYSTEM_ID
+    </value>
+  </query>
+  <query>
+    <name>C3_GET_DOCS_MOD</name>
+    <value>
+      SELECT A.SYSTEM_ID,
+      A.DOCNAME,
+      A.NUM_PROTO,
+      A.NUM_ANNO_PROTO,
+      A.CHA_TIPO_PROTO,
+      format(A.DTA_PROTO, 'DD/MM/YYYY HH24:MI:SS') AS DATAPROTO,
+      format(A.CREATION_DATE, 'DD/MM/YYYY HH24:MI:SS') AS DATACREAZIONE,
+      (SELECT top(1) concat(SYSTEM_ID ,'§', VAR_CODICE ,'§', VAR_DESC_REGISTRO  ,'§', CHA_RF) FROM DPA_EL_REGISTRI WHERE SYSTEM_ID = A.ID_REGISTRO) AS REGISTRO,
+      (SELECT top(1) FULL_NAME FROM PEOPLE WHERE SYSTEM_ID = A.AUTHOR) AS AUTORE,
+      A.AUTHOR AS IDAUTORE,
+      (SELECT top(1) DCG.VAR_DESC_CORR FROM DPA_CORR_GLOBALI DCG, SECURITY SEC WHERE SEC.THING= A.SYSTEM_ID AND SEC.PERSONORGROUP = DCG.ID_GRUPPO AND SEC.ACCESSRIGHTS = 255) AS RUOLOCREATORE,
+      (SELECT top(1) PERSONORGROUP+1 FROM SECURITY WHERE THING = A.SYSTEM_ID AND ACCESSRIGHTS=255) AS IDRUOLOAUTORE,
+      (SELECT top(1) VAR_DESC_CORR FROM DPA_CORR_GLOBALI WHERE SYSTEM_ID = A.ID_UO_CREATORE) AS UOCREATRICE,
+      (SELECT top(1) concat(SYSTEM_ID ,'§', VAR_DESC_ATTO) FROM DPA_TIPO_ATTO WHERE SYSTEM_ID = A.ID_TIPO_ATTO) AS TIPOLOGIA,
+      docsadm.corrcat(A.SYSTEM_ID,A.CHA_TIPO_PROTO) MITT_DEST,
+      (SELECT top(1) concat(X.VAR_NOMEORIGINALE ,'§', Y.VERSION_LABEL ,'§',  Z.MIME_TYPE ,'§', X.VERSION_ID ,'§', SUBSTRING(X.PATH,CHARINDEX(X.PATH,'\',-1)+1 ,LEN(X.PATH)) ,'§', X.FILE_SIZE)
+      FROM COMPONENTS X, VERSIONS Y, APPS Z WHERE
+      X.VERSION_ID = Y.VERSION_ID AND
+      UPPER(X.EXT)= UPPER(Z.DEFAULT_EXTENSION) AND
+      Z.MIME_TYPE IS NOT NULL AND
+      Y.VERSION_ID = (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.SYSTEM_ID)
+      AND X.DOCNUMBER=A.SYSTEM_ID AND) AS DOC_PRINCIPALE,
+      (SELECT COUNT(*) FROM PROFILE WHERE ID_DOCUMENTO_PRINCIPALE = A.SYSTEM_ID) AS NUM_ALLEGATI,
+      A.VAR_PROF_OGGETTO AS OGGETTO
+      FROM PROFILE A
+      WHERE
+      CREATION_TIME NOT @dateLimitsMod@
+      AND A.ID_DOCUMENTO_PRINCIPALE IS NULL
+      AND A.CHA_IN_CESTINO IS NULL
+      AND EXISTS (SELECT 'X' FROM DPA_LOG WHERE ID_OGGETTO = A.SYSTEM_ID AND DTA_AZIONE @dateLimitsMod@
+      AND VAR_COD_AZIONE IN ('PUT_FILE','ADD_VERSION','MODIFIED_OBJECT_PROTO','RECORD_PREDISPOSED','MOD_MITT_DEST','MODIFIED_OBJECT_DOC','ANNULL_PROTOCOLLO'))
+      ORDER BY A.SYSTEM_ID
+    </value>
+  </query>
+  <query>
+    <name>C3_GET_DOCS_MOD_ALLEGATI</name>
+    <value>
+      SELECT A.SYSTEM_ID,
+      A.DOCNAME,
+      A.NUM_PROTO,
+      A.NUM_ANNO_PROTO,
+      A.CHA_TIPO_PROTO,
+      format(A.DTA_PROTO, 'DD/MM/YYYY HH24:MI:SS') AS DATAPROTO,
+      format(A.CREATION_DATE, 'DD/MM/YYYY HH24:MI:SS') AS DATACREAZIONE,
+      (SELECT top(1) concat(SYSTEM_ID ,'§', VAR_CODICE ,'§', VAR_DESC_REGISTRO  ,'§', CHA_RF) FROM DPA_EL_REGISTRI WHERE SYSTEM_ID = A.ID_REGISTRO) AS REGISTRO,
+      (SELECT top(1) FULL_NAME FROM PEOPLE WHERE SYSTEM_ID = A.AUTHOR) AS AUTORE,
+      A.AUTHOR AS IDAUTORE,
+      (SELECT top(1) DCG.VAR_DESC_CORR FROM DPA_CORR_GLOBALI DCG, SECURITY SEC WHERE SEC.THING= A.SYSTEM_ID AND SEC.PERSONORGROUP = DCG.ID_GRUPPO AND SEC.ACCESSRIGHTS = 255) AS RUOLOCREATORE,
+      (SELECT top(1) PERSONORGROUP+1 FROM SECURITY WHERE THING = A.SYSTEM_ID AND ACCESSRIGHTS=255) AS IDRUOLOAUTORE,
+      (SELECT top(1) VAR_DESC_CORR FROM DPA_CORR_GLOBALI WHERE SYSTEM_ID = A.ID_UO_CREATORE) AS UOCREATRICE,
+      (SELECT top(1) concat(SYSTEM_ID ,'§', VAR_DESC_ATTO) FROM DPA_TIPO_ATTO WHERE SYSTEM_ID = A.ID_TIPO_ATTO) AS TIPOLOGIA,
+      docsadm.corrcat(A.SYSTEM_ID,A.CHA_TIPO_PROTO) MITT_DEST,
+      (SELECT top(1) concat(X.VAR_NOMEORIGINALE ,'§', Y.VERSION_LABEL ,'§',  Z.MIME_TYPE ,'§', X.VERSION_ID ,'§', SUBSTRING(X.PATH,CHARINDEX(X.PATH,'\',-1)+1 ,LEN(X.PATH)) ,'§', X.FILE_SIZE)
+      FROM COMPONENTS X, VERSIONS Y, APPS Z WHERE
+      X.VERSION_ID = Y.VERSION_ID AND
+      UPPER(X.EXT)= UPPER(Z.DEFAULT_EXTENSION) AND
+      Z.MIME_TYPE IS NOT NULL AND
+      Y.VERSION_ID = (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.SYSTEM_ID)
+      AND X.DOCNUMBER=A.SYSTEM_ID AND) AS DOC_PRINCIPALE,
+      (SELECT COUNT(*) FROM PROFILE WHERE ID_DOCUMENTO_PRINCIPALE = A.SYSTEM_ID) AS NUM_ALLEGATI,
+      A.VAR_PROF_OGGETTO AS OGGETTO
+      FROM PROFILE A
+      WHERE
+      CREATION_TIME NOT @dateLimitsMod@
+      AND A.ID_DOCUMENTO_PRINCIPALE IS NULL
+      AND A.CHA_IN_CESTINO IS NULL
+      AND EXISTS (SELECT 'X' FROM DPA_LOG Q, PROFILE W WHERE Q.ID_OGGETTO = W.SYSTEM_ID AND Q.DTA_AZIONE @dateLimitsMod@
+      AND Q.VAR_COD_AZIONE IN ('PUT_FILE','ADD_VERSION','MODIFIED_OBJECT_PROTO','RECORD_PREDISPOSED','MOD_MITT_DEST','MODIFIED_OBJECT_DOC','ANNULL_PROTOCOLLO')
+      AND W.ID_DOCUMENTO_PRINCIPALE = A.SYSTEM_ID)
+      ORDER BY A.SYSTEM_ID
+    </value>
+  </query>
+  <query>
+    <name>C3_GET_DOCS_MOD_LED</name>
+    <value>
+      SELECT A.SYSTEM_ID,
+      A.DOCNAME,
+      A.NUM_PROTO,
+      A.NUM_ANNO_PROTO,
+      A.CHA_TIPO_PROTO,
+      format(A.DTA_PROTO, 'DD/MM/YYYY HH24:MI:SS') AS DATAPROTO,
+      format(A.CREATION_DATE, 'DD/MM/YYYY HH24:MI:SS') AS DATACREAZIONE,
+      (SELECT top(1) concat(SYSTEM_ID ,'§', VAR_CODICE ,'§', VAR_DESC_REGISTRO  ,'§', CHA_RF) FROM DPA_EL_REGISTRI WHERE SYSTEM_ID = A.ID_REGISTRO) AS REGISTRO,
+      (SELECT top(1) FULL_NAME FROM PEOPLE WHERE SYSTEM_ID = A.AUTHOR) AS AUTORE,
+      A.AUTHOR AS IDAUTORE,
+      (SELECT top(1) DCG.VAR_DESC_CORR FROM DPA_CORR_GLOBALI DCG, SECURITY SEC WHERE SEC.THING= A.SYSTEM_ID AND SEC.PERSONORGROUP = DCG.ID_GRUPPO AND SEC.ACCESSRIGHTS = 255) AS RUOLOCREATORE,
+      (SELECT top(1) PERSONORGROUP+1 FROM SECURITY WHERE THING = A.SYSTEM_ID AND ACCESSRIGHTS=255) AS IDRUOLOAUTORE,
+      (SELECT top(1) VAR_DESC_CORR FROM DPA_CORR_GLOBALI WHERE SYSTEM_ID = A.ID_UO_CREATORE) AS UOCREATRICE,
+      (SELECT top(1) concat(SYSTEM_ID ,'§', VAR_DESC_ATTO) FROM DPA_TIPO_ATTO WHERE SYSTEM_ID = A.ID_TIPO_ATTO) AS TIPOLOGIA,
+      docsadm.corrcat(A.SYSTEM_ID,A.CHA_TIPO_PROTO) MITT_DEST,
+      (SELECT top(1) concat(X.VAR_NOMEORIGINALE ,'§', Y.VERSION_LABEL ,'§',  Z.MIME_TYPE ,'§', X.VERSION_ID ,'§', SUBSTRING(X.PATH,CHARINDEX(X.PATH,'\',-1)+1 ,LEN(X.PATH)) ,'§', X.FILE_SIZE)
+      FROM COMPONENTS X, VERSIONS Y, APPS Z WHERE
+      X.VERSION_ID = Y.VERSION_ID AND
+      UPPER(X.EXT)= UPPER(Z.DEFAULT_EXTENSION) AND
+      Z.MIME_TYPE IS NOT NULL AND
+      Y.VERSION_ID = (SELECT MAX(VERSION_ID) FROM COMPONENTS WHERE DOCNUMBER = A.SYSTEM_ID)
+      AND X.DOCNUMBER=A.SYSTEM_ID) AS DOC_PRINCIPALE,
+      (SELECT COUNT(*) FROM PROFILE WHERE ID_DOCUMENTO_PRINCIPALE = A.SYSTEM_ID) AS NUM_ALLEGATI,
+      A.VAR_PROF_OGGETTO AS OGGETTO
+      FROM PROFILE A
+      WHERE
+      CREATION_TIME NOT @dateLimitsMod@
+      AND LAST_EDIT_DATE @dateLimitsMod@
+      AND A.ID_DOCUMENTO_PRINCIPALE IS NULL
+      AND A.CHA_IN_CESTINO IS NULL
+      ORDER BY A.SYSTEM_ID
+    </value>
+  </query>
+  <!-- FINE CERCA TRE -->
+<!-- Controllo stampe repertorio -->
+  <query>
+    <name>CTRL_STAMPE_REP_ERRORI</name>
+    <value>
+      select id_amm,amministrazione,id_tipo, tipologia, idrepertorio, repertorio,
+      inizio,datafine,decode(ultimastampa,null,'Mai stampato',ultimastampa) as ultimastampa,prossimastampa,frequenza,
+      decode(registro,null,'Di Tipologia',registro) as registro,
+      respstampa,ruolorespstampa,mailrespstampa,mail_resp_conservazione,
+      num_doc, num_doc_annullati,num_doc_residui,
+      tipo_abilitato, tipo_in_esercizio, utenteabilitato, fineruolo, ut_in_ruolo,
+      (case when num_doc_residui=1 then 'ERRORE' else 'OK' end) as singolo_doc_ieri,
+      (case when num_doc =1 then 'ERRORE' else 'OK' end) as singolo_doc,
+      (case when ultimastampa = 'Mai stampato' then 'ERRORE' else 'OK' end) as mai_stampato
+      from(
+      select c.system_id as id_amm,
+      c.var_desc_amm as amministrazione,
+      b.system_id as id_tipo,
+      b.var_desc_atto as tipologia,
+      a.counterid as idrepertorio,
+      g.descrizione as repertorio,
+      to_char(a.dtastart,'dd/mm/yyyy') as inizio,
+      to_char(a.dtafinish, 'dd/mm/yyyy') as datafine,
+      to_char(a.dtalastprint, 'dd/mm/yyyy hh24:mi:ss') as ultimastampa,
+      to_char(a.dtanextautomaticprint, 'dd/mm/yyyy hh24:mi:ss') as prossimastampa,
+      decode(a.printfreq,'D','Giornaliera','N','Non abilitata','M','Mensile','W','Settimanale','FD','15 giorni') as frequenza,
+      (select var_codice || ' - ' || var_desc_registro from dpa_el_registri where system_id = a.registryid or system_id =a.rfid) as registro,
+      d.full_name as respStampa,
+      f.var_desc_corr as RuoloRespStampa,
+      d.email_address as mailrespstampa,
+      (select email_address from people where system_id = c.id_utente_resp_cons) as mail_resp_conservazione,
+      (select count(*) from dpa_associazione_templates where id_oggetto = a.counterid and valore_oggetto_db is not null
+      and dta_ins>a.dtalastprint
+      and id_aoo_rf in (a.registryid, a.rfid,0)
+      ) as num_doc,
+      (select count(*) from dpa_associazione_templates where id_oggetto = a.counterid and valore_oggetto_db is not null
+      and dta_annullamento>a.dtalastprint
+      and id_aoo_rf in (a.registryid, a.rfid,0)
+      ) as num_doc_annullati,
+      (select count(*) from dpa_associazione_templates where id_oggetto = a.counterid and valore_oggetto_db is not null
+      and dta_ins>a.dtalastprint
+      and dta_ins &lt; (sysdate -1)
+      and id_aoo_rf in (a.registryid, a.rfid,0)
+      ) as num_doc_residui,
+      decode(b.abilitato_si_no,1,'OK',0,'ERRORE') as tipo_abilitato,
+      decode(b.in_esercizio,'SI','OK','NO','ERRORE') as tipo_in_esercizio,
+      decode(d.disabled,'N','OK','Y','ERRORE') as UtenteAbilitato,
+      decode(f.dta_fine,null,'OK','ERRORE') as fineruolo,
+      decode(e.dta_fine,null,'OK','ERRORE') as ut_in_ruolo
+      from dpa_registri_repertorio a , dpa_tipo_atto b, dpa_amministra c, people d, peoplegroups e, dpa_corr_globali f, dpa_oggetti_custom g
+      where a.dtafinish > sysdate
+      and b.system_id = a.tipologyid
+      and c.system_id = b.id_amm
+      and d.system_id = a.printeruserrespid
+      and f.id_gruppo = a.printerrolerespid
+      and d.system_id = e.people_system_id
+      and f.id_gruppo = e.groups_system_id
+      and g.system_id = a.counterid
+      and a.dtalastprint &lt; (a.dtanextautomaticprint -1)
+      and a.dtanextautomaticprint &lt; trunc(sysdate+1) )
+      where ultimastampa is null or num_doc>0 or num_doc_annullati>0
+      order by amministrazione, tipologia, registro
+    </value>
+  </query>
+  <query>
+    <name>CTRL_STAMPE_REP_FILE_PRESENTE</name>
+    <value>
+      select
+      c.system_id as id_amm,
+      c.var_desc_amm as amministrazione,
+      b.system_id as id_tipo,
+      b.var_desc_atto as tipologia,
+      a.counterid as idrepertorio,
+      g.descrizione as repertorio,
+      to_char(a.dtastart,'dd/mm/yyyy') as inizio,
+      to_char(a.dtafinish, 'dd/mm/yyyy') as datafine,
+      to_char(a.dtalastprint, 'dd/mm/yyyy hh24:mi:ss') as ultimastampa,
+      to_char(a.dtanextautomaticprint, 'dd/mm/yyyy hh24:mi:ss') as prossimastampa,
+      decode(a.printfreq,'D','Giornaliera','N','Non abilitata','M','Mensile','W','Settimanale','FD','15 giorni') as frequenza,
+      (select var_codice || ' - ' || var_desc_registro from dpa_el_registri where system_id = a.registryid or system_id =a.rfid) as registro,
+      d.full_name as respStampa,
+      f.var_desc_corr as RuoloRespStampa ,
+      d.email_address as mailrespstampa,
+      (select email_address from people where system_id = c.id_utente_resp_cons) as mail_resp_conservazione,
+      h.docnumber as iddocstampa,
+      to_char(h.dta_stampa, 'dd/mm/yyyy hh24:mi:ss') as datastampa
+      from dpa_registri_repertorio a , dpa_tipo_atto b, dpa_amministra c, people d,
+      peoplegroups e, dpa_corr_globali f, dpa_oggetti_custom g, dpa_stampa_repertori h
+      where a.dtafinish > sysdate
+      and b.system_id = a.tipologyid
+      and c.system_id = b.id_amm
+      and d.system_id = a.printeruserrespid
+      and f.id_gruppo = a.printerrolerespid
+      and d.system_id = e.people_system_id
+      and f.id_gruppo = e.groups_system_id
+      and g.system_id = a.counterid
+      and h.id_repertorio = a.counterid
+      and (not exists(select 'x' from components where docnumber = h.docnumber) or exists(select 'x' from components where docnumber = h.docnumber and var_impronta is null ))
+      and h.dta_stampa > trunc(a.dtalastprint)
+      and a.dtalastprint &lt; (a.dtanextautomaticprint -1)
+      and (h.registryid = a.rfid or h.registryid = a.registryid)
+      order by c.var_desc_amm, b.var_desc_atto, h.docnumber
+    </value>
+  </query>
+  <!-- Fine Controllo stampe repertorio -->
+<!--Report processi-->
+	<query>
+		<name>I_DPA_REPORT_PROCESSI_TICK</name>
+		<value>
+			INSERT INTO DPA_REPORT_PROCESSI_TICK
+			(
+			ID_REPORT_PROCESSI,
+			ID_PROCESSO,
+			NOME_PROCESSO,
+			ID_RUOLO_CREATORE,
+			ID_UTENTE_CREATORE,
+			ID_PASSO,
+			ID_RUOLO_COINVOLTO,
+			ID_UTENTE_COINVOLTO
+			)
+			SELECT
+			(SELECT (ISNULL(max(ID_REPORT_PROCESSI),0)) + 1 as ID_REPORT_PROCESSI FROM DPA_REPORT_PROCESSI_TICK),
+			p.id_processo,
+			p.nome,
+			p.ruolo_autore,
+			p.utente_autore,
+			pf.id_Passo,
+			pf.id_ruolo_coinvolto,
+			pf.id_utente_coinvolto
+			FROM DPA_SCHEMA_PROCESSO_FIRMA P INNER JOIN DPA_PASSO_DI_FIRMA PF ON P.ID_PROCESSO = PF.ID_PROCESSO
+			WHERE (P.TICK is null Or P.Tick = 0)
+			@idRuoloTitolare@
+			@idUtenteTitolare@
+		</value>
+	</query>
+	<query>
+		<name>I_DPA_REPORT_PROCESSI_TICK_REGISTRO_RUOLO</name>
+		<value>
+			INSERT INTO DPA_REPORT_PROCESSI_TICK
+			(
+			ID_REPORT_PROCESSI,
+			ID_PROCESSO,
+			NOME_PROCESSO,
+			ID_RUOLO_CREATORE,
+			ID_UTENTE_CREATORE,
+			ID_PASSO,
+			ID_RUOLO_COINVOLTO,
+			ID_UTENTE_COINVOLTO
+			)
+			SELECT
+			(SELECT (ISNULL(max(ID_REPORT_PROCESSI),0)) + 1 as ID_REPORT_PROCESSI FROM DPA_REPORT_PROCESSI_TICK),
+			p.id_processo,
+			p.nome,
+			p.ruolo_autore,
+			p.utente_autore,
+			pf.id_Passo,
+			pf.id_ruolo_coinvolto,
+			pf.id_utente_coinvolto
+			FROM DPA_SCHEMA_PROCESSO_FIRMA P,
+			DPA_PASSO_DI_FIRMA PF,
+			DPA_L_RUOLO_REG L
+			WHERE (P.TICK is null Or P.Tick = 0)
+			AND P.ID_PROCESSO = PF.ID_PROCESSO
+			AND PF.ID_RUOLO_COINVOLTO = @idGruppo@
+			AND L.ID_RUOLO_IN_UO = @idRuoloInUO@ AND L.ID_REGISTRO @idRegistriSelezionati@
+			AND (L.ID_REGISTRO = PF.ID_AOO OR L.ID_REGISTRO = PF.ID_RF )
+		</value>
+	</query>
+	<query>
+		<name>I_DPA_REPORT_PROCESSI_TICK_REGISTRO_MAIL</name>
+		<value>
+			INSERT INTO DPA_REPORT_PROCESSI_TICK
+			(
+			ID_REPORT_PROCESSI,
+			ID_PROCESSO,
+			NOME_PROCESSO,
+			ID_RUOLO_CREATORE,
+			ID_UTENTE_CREATORE,
+			ID_PASSO,
+			ID_RUOLO_COINVOLTO,
+			ID_UTENTE_COINVOLTO
+			)
+			SELECT
+			(SELECT (ISNULL(max(ID_REPORT_PROCESSI),0)) + 1 as ID_REPORT_PROCESSI FROM DPA_REPORT_PROCESSI_TICK),
+			p.id_processo,
+			p.nome,
+			p.ruolo_autore,
+			p.utente_autore,
+			pf.id_Passo,
+			pf.id_ruolo_coinvolto,
+			pf.id_utente_coinvolto
+			FROM DPA_SCHEMA_PROCESSO_FIRMA P,
+			DPA_PASSO_DI_FIRMA PF, DPA_MAIL_REGISTRI M
+			WHERE (P.TICK is null Or P.Tick = 0)
+			AND P.ID_PROCESSO = PF.ID_PROCESSO
+			AND PF.ID_RF=@idRegistro@
+			AND M.ID_REGISTRO = @idRegistro@ AND M.VAR_EMAIL_REGISTRO = '@emailRegistro@'
+			AND PF.ID_MAIL_REGISTRO = M.SYSTEM_ID
+		</value>
+	</query>
+	<query>
+		<name>I_DPA_REPORT_PROCESSI_TICK_REGISTRO</name>
+		<value>
+			INSERT INTO DPA_REPORT_PROCESSI_TICK
+			(
+			ID_REPORT_PROCESSI,
+			ID_PROCESSO,
+			NOME_PROCESSO,
+			ID_RUOLO_CREATORE,
+			ID_UTENTE_CREATORE,
+			ID_PASSO,
+			ID_RUOLO_COINVOLTO,
+			ID_UTENTE_COINVOLTO
+			)
+			SELECT
+			(SELECT (ISNULL(max(ID_REPORT_PROCESSI),0)) + 1 as ID_REPORT_PROCESSI FROM DPA_REPORT_PROCESSI_TICK),
+			p.id_processo,
+			p.nome,
+			p.ruolo_autore,
+			p.utente_autore,
+			pf.id_Passo,
+			pf.id_ruolo_coinvolto,
+			pf.id_utente_coinvolto
+			FROM DPA_SCHEMA_PROCESSO_FIRMA P,
+			DPA_PASSO_DI_FIRMA PF
+			WHERE (P.TICK is null Or P.Tick = 0)
+			AND P.ID_PROCESSO = PF.ID_PROCESSO
+			AND PF.ID_RF=@idRegistro@ OR PF.ID_AOO=@idRegistro@
+		</value>
+	</query>
+	<query>
+		<name>S_DPA_REPORT_PROCESSI_TICK_CREATORE</name>
+		<value>
+			SELECT
+			ID_RUOLO_CREATORE
+			FROM DPA_REPORT_PROCESSI_TICK
+			WHERE ID_REPORT_PROCESSI = @idReport@
+		</value>
+	</query>
+	<query>
+		<name>D_DPA_REPORT_PROCESSI_TICK</name>
+		<value>
+			DELETE FROM DPA_REPORT_PROCESSI_TICK
+			WHERE ID_REPORT_PROCESSI = @idReport@
+		</value>
+	</query>
+	<query>
+		<name>S_COUNT_DPA_SCHEMA_PROCESSO_FIRMA_BY_TITOLARE</name>
+		<value>
+			SELECT COUNT(DISTINCT P.ID_PROCESSO)
+			FROM DPA_SCHEMA_PROCESSO_FIRMA P INNER JOIN DPA_PASSO_DI_FIRMA PF ON P.ID_PROCESSO = PF.ID_PROCESSO
+			WHERE (P.TICK is null Or P.Tick = 0)
+			@idRuoloTitolare@
+			@idUtenteTitolare@
+		</value>
+	</query>
+<!-- fine report processi-->
 </listeQuery>
 
